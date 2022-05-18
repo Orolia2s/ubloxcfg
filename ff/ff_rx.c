@@ -296,10 +296,10 @@ PARSER_MSG_t *rxGetNextMessageTimeout(RX_t *rx, const uint32_t timeout)
     {
         const uint32_t t0 = TIME();
         const uint32_t t1 = t0 + timeout;
-        printf("t1 is %u", t1);
+        printf("t1 is %u\n", t1);
         while (TIME() < t1)
         {
-            printf("TIME is %u", TIME());
+            printf("TIME is %u\n", TIME());
             if (rx->abort)
             {
                 break;
