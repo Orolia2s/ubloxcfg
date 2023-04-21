@@ -17,6 +17,8 @@
 #include <string.h>
 #include <stddef.h>
 
+#include <stdlib.h>
+
 #include "ff_debug.h"
 #include "ff_stuff.h"
 #include "ff_ubx.h"
@@ -108,13 +110,28 @@ static const PARSER_FUNC_t kParserFuncs[] =
     { .func = _isNovatelMessage, .type = PARSER_MSGTYPE_NOVATEL, .name = "NOVATEL" },
 };
 
+static char* convert_to_hex(const uint8_t* data, int size)
+{
+    char* hex_str = (char*) malloc(size*2+1);
+    if (hex_str == NULL)
+	{
+        return NULL;
+    }
+    for (int i = 0; i < size; i++)
+	{
+        sprintf(hex_str+i*2, "%02X", data[i]);
+    }
+    hex_str[size*2] = '\0';
+    return hex_str;
+}
+
 bool parserProcess(PARSER_t *parser, PARSER_MSG_t *msg, const bool info)
 {
     while (parser->size > 0)
     {
         // Run parser functions
         int msgSize = 0;
-        PARSER_MSGTYPE_t msgType = PARSER_MSGTYPE_GARBAGE;
+        PARSER_MSGTYPE_t msgType = PARSER_MSGTYPE_GARBAGE;        
         for (int ix = 0; ix < NUMOF(kParserFuncs); ix++)
         {
             msgSize = kParserFuncs[ix].func(&parser->buf[parser->offs], parser->size);
@@ -161,6 +178,9 @@ bool parserProcess(PARSER_t *parser, PARSER_MSG_t *msg, const bool info)
         // We have a message (and come back to the same message in the next iteration)
         else // msgLen > 0
         {
+            char* raw = convert_to_hex(&parser->buf[parser->offs], parser->size);
+            printf("Received RAW DATA: %s\n", raw);
+            free(raw);
             // Return garbage first
             if (parser->offs > 0)
             {
