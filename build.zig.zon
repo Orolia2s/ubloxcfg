@@ -1,0 +1,12 @@
+.{
+    .name = .ubloxcfg,
+    .version = "1.16.0",
+    .fingerprint = 0xfd84f73c80e1c439,
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "include",
+    },
+}

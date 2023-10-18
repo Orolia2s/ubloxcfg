@@ -32,3 +32,16 @@ imgui.ini
 /.history
 
 *.pyc
+
+*conan*.sh
+*conan*.conf
+CMake*.json
+*.cmake
+
+include/config.h
+*.o
+*.d
+*.a
+
+zig-out
+.zig-cache
