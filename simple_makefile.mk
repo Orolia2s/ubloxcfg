@@ -110,7 +110,7 @@ $(Shared): $(Objects) # Create a shared object
 # a prerequisite to use automatic variables like $@, $*, etc
 .SECONDEXPANSION:
 
-$(Objects): $(GeneratedHeader) | $$(@D) # Compile a single object
+$(Objects): | $(GeneratedHeader) $$(@D) # Compile a single object
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(GeneratedHeader): $$(@F).in $$(@F).pl

@@ -34,10 +34,11 @@ imgui.ini
 *.pyc
 
 *conan*.sh
+*conan*.conf
 CMake*.json
 *.cmake
 
-config.h
+include/config.h
 *.o
 *.d
 *.a
