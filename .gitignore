@@ -36,3 +36,8 @@ imgui.ini
 *conan*.sh
 CMake*.json
 *.cmake
+
+config.h
+*.o
+*.d
+*.a
