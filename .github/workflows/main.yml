@@ -6,14 +6,12 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ zig ]
   pull_request:
-    branches: [ master ]
+    branches: [ zig ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
-
 # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -21,24 +19,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v3
-    # Install additional packages that we need to build
-    - name: install packages
-      run: |
-        sudo apt-get -y update
-        sudo apt-get -y install gcc gcc-multilib perl libpath-tiny-perl libdata-float-perl mingw-w64 doxygen libglfw3-dev libglx-dev libcurl4-gnutls-dev libfreetype-dev libglu1-mesa-dev zlib1g-dev libglm-dev
-    # Runs a single command using the runners shell
-    - name: make ci
-      run: make ci -k
-#    # Make tar of output
-#    - name: tar output
-#      run: tar -czv --owner=0 --group=0 -f output.tar.gz output
-    - name: make libubloxcfg.so
-      run: make libubloxcfg.so
-    - name: Upload output
-      uses: actions/upload-artifact@v2
-      with:
-        name: ubloxcfg-build
-        path: output/*.zip
-
-# eof
+    - uses: actions/checkout@v4
+    - uses: mlugg/setup-zig@v2
+    - run: zig build --summary all
