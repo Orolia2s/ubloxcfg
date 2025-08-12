@@ -1,0 +1,47 @@
+Source: ubloxcfg
+Section: libs
+Priority: optional
+Maintainer: Nicolas Bourdaud <nicolas.bourdaud@fr.nav-timing.safrangroup.com>
+Build-Depends: debhelper-compat (= 13), cmake
+Standards-Version: 4.5.0
+Rules-Requires-Root: no
+Homepage: https://github.com/Orolia2s/ubloxcfg
+
+Package: libubloxcfg0
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: u-blox 9 receivers config libs and tool (shared lib)
+ This implements a library (API) do deal with the new configuration interface
+ introduced in u-blox 9 positioning receivers (see references in
+ ubloxcfg-50-ublox.jsonc).
+ .
+ A command line cfgtool is provided to configure a receiver from the
+ configuration defined in a human-readable configuration file, as well as a few
+ other functions.
+ .
+ The tool uses a number of small libraries (a UBX/NMEA/RTCM3 message parser, a
+ serial port library, a receiver control library, and some other things), which
+ could be useful for other projects.
+ .
+ This package contains the shared library.
+
+Package: libubloxcfg-dev
+Architecture: any
+Depends: ${misc:Depends}, libubloxcfg0 (= ${binary:Version})
+Description: u-blox 9 receivers config libs and tool (Development files)
+ This implements a library (API) do deal with the new configuration interface
+ introduced in u-blox 9 positioning receivers (see references in
+ ubloxcfg-50-ublox.jsonc).
+ .
+ A command line cfgtool is provided to configure a receiver from the
+ configuration defined in a human-readable configuration file, as well as a few
+ other functions.
+ .
+ The tool uses a number of small libraries (a UBX/NMEA/RTCM3 message parser, a
+ serial port library, a receiver control library, and some other things), which
+ could be useful for other projects.
+ .
+ This package contains the files needed to compile and link programs which
+ use ubloxcfg.
