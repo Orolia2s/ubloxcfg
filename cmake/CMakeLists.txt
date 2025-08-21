@@ -100,8 +100,8 @@ install(TARGETS ${PROJECT_NAME}
     LIBRARY       DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 
-configure_file(${PROJECT_NAME}.pc.in ${PROJECT_NAME}.pc @ONLY)
+configure_file(${PROJECT_NAME}.pc.in lib${PROJECT_NAME}.pc @ONLY)
 
-install(FILES ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
+install(FILES ${CMAKE_BINARY_DIR}/lib${PROJECT_NAME}.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 
 # ----------------------------------------------------------------------------------------------------------------------
